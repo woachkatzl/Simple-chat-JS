@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1 class="pt-4 fs-2">Сервис комментариев со спам фильтром</h1>
+        <div class="row gx-5">
+            <div class="col-md-4">
+                <form class="d-flex flex-column" action="">
+                    <h2 class="py-4 fs-3">Оставьте ваш комментарий</h2>
+                    <label class="pb-2" for="name-input">Введите ваше имя:</label>
+                    <input class="mb-3" type="text" name="" id="name-input">
+                    <label class="pb-2" for="link-input">Введите ссылку вашего аватара:</label>
+                    <input class="mb-3" type="text" name="" id="link-input">
+                    <label class="pb-2" for="comment-input">Оставьте комментарий:</label>
+                    <textarea name="" id="comment-input" cols="50" rows="10"></textarea>
+                    <input class="btn btn-success mt-4 w-50" type="submit" value="Отправить">
+                </form>
+            </div>
+            <div class="col-md-8">
+                <h2 class="py-4 fs-3">Чат</h2>
+                <div class="d-flex align-items-center">
+                    <img class="avatar-img" src="https://i.etsystatic.com/18604024/r/il/6e6c3a/4649273370/il_1588xN.4649273370_1yi4.jpg" width="120px" alt="Ваш аватар">
+                    <p class="px-4 fw-bold">Имя</p>
+                </div>
+                <p class="py-4">Комментарий</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
