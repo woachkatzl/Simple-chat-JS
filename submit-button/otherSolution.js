@@ -1,14 +1,19 @@
+//Единственное отличие в этом решении - я попробовала сделать работу чата через событие формы submit, а не просто кастомным кодом для кнопки.
+
 // FORM ELEMENTS
 const nameInput = document.querySelector("#name-input");
 const linkInput = document.querySelector("#link-input");
 const commentInput = document.querySelector("#comment-input");
-const submitButton = document.querySelector(".btn");
+const commentForm = document.querySelector(".comment-form");
 
 // CHAT ELEMENTS
 const chatSection = document.querySelector(".chat");
 
-// BUTTON ELEMENT
-submitButton.addEventListener("click", postUserComment);
+//FORM EVENT LISTENER
+commentForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    postUserComment();
+})
 
 //FUNCTIONS
 
