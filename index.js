@@ -90,23 +90,26 @@ function fixName(name) {
 
     // Checking if there is a dash in the name and making sure that the second names after the dash start with an upper cases letter
     if (nameCasing.includes("-") === true) {
-        let nameWithDash = ""
         // Ищу все дефисы в вводных данных
         const dashPosition = nameCasing.match(/-/g);
-        // Смотрю, сколько дефисов встречается, один или два
+
+        // Нахожу индекс первой буквы после первого дефиса
+        let secondNameStart = nameCasing.indexOf("-") + 1;
+
+        // Делаю эту букву заглавной
+        let nameWithDash = nameCasing.slice(0, secondNameStart) + nameCasing[secondNameStart].toUpperCase() + nameCasing.slice(secondNameStart + 1);
+
+        // Смотрю, есть ли в строке больше одного дефиса
         if (dashPosition.length === 1) {
-            const secondNameStart = nameCasing.indexOf("-") + 1;
-
-            nameWithDash = nameCasing.slice(0, secondNameStart) + nameCasing[secondNameStart].toUpperCase() + nameCasing.slice(secondNameStart + 1);
-
+            // Если нет, то строка с именем готова
             return nameWithDash.trim();
-        } else {
-            let secondNameStart1 = nameCasing.indexOf("-") + 1;
-            nameWithDash = nameCasing.slice(0, secondNameStart1) + nameCasing[secondNameStart1].toUpperCase() + nameCasing.slice(secondNameStart1 + 1);
+        }
+        else {
 
+            // Если есть, то для каждого следующего дефиса, делаем букву после него заглавной
             for (i = 1; i < dashPosition.length; i++) {
-                secondNameStart1 = nameCasing.indexOf("-", secondNameStart1) + 1;
-                nameWithDash = nameWithDash.slice(0, secondNameStart1) + nameWithDash[secondNameStart1].toUpperCase() + nameWithDash.slice(secondNameStart1 + 1);
+                secondNameStart = nameCasing.indexOf("-", secondNameStart) + 1;
+                nameWithDash = nameWithDash.slice(0, secondNameStart) + nameWithDash[secondNameStart].toUpperCase() + nameWithDash.slice(secondNameStart + 1);
             }
 
             return nameWithDash.trim();
