@@ -98,12 +98,17 @@ function fixName(name) {
             const secondNameStart = nameCasing.indexOf("-") + 1;
 
             nameWithDash = nameCasing.slice(0, secondNameStart) + nameCasing[secondNameStart].toUpperCase() + nameCasing.slice(secondNameStart + 1);
+
             return nameWithDash.trim();
         } else {
-            const secondNameStart1 = nameCasing.indexOf("-") + 1;
-            const secondNameStart2 = nameCasing.lastIndexOf("-") + 1;
+            let secondNameStart1 = nameCasing.indexOf("-") + 1;
+            nameWithDash = nameCasing.slice(0, secondNameStart1) + nameCasing[secondNameStart1].toUpperCase() + nameCasing.slice(secondNameStart1 + 1);
 
-            nameWithDash = nameCasing.slice(0, secondNameStart1) + nameCasing[secondNameStart1].toUpperCase() + nameCasing.slice(secondNameStart1 + 1, secondNameStart2) + nameCasing[secondNameStart2].toUpperCase() + nameCasing.slice(secondNameStart2 + 1);
+            for (i = 1; i < dashPosition.length; i++) {
+                secondNameStart1 = nameCasing.indexOf("-", secondNameStart1) + 1;
+                nameWithDash = nameWithDash.slice(0, secondNameStart1) + nameWithDash[secondNameStart1].toUpperCase() + nameWithDash.slice(secondNameStart1 + 1);
+            }
+
             return nameWithDash.trim();
         }
     } else {
