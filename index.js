@@ -88,12 +88,24 @@ function fixName(name) {
         nameCasing = nameCasing + nameSplit[i] + " ";
     }
 
-    // Checking if there is a dash in the name and making sure that the the secomd name after the dash start with an upper cases letter
+    // Checking if there is a dash in the name and making sure that the second names after the dash start with an upper cases letter
     if (nameCasing.includes("-") === true) {
-        const secondNameStart = nameCasing.indexOf("-") + 1;
+        let nameWithDash = ""
+        // Ищу все дефисы в вводных данных
+        const dashPosition = nameCasing.match(/-/g);
+        // Смотрю, сколько дефисов встречается, один или два
+        if (dashPosition.length === 1) {
+            const secondNameStart = nameCasing.indexOf("-") + 1;
 
-        const nameWithDash = nameCasing.slice(0, secondNameStart) + nameCasing[secondNameStart].toUpperCase() + nameCasing.slice(secondNameStart + 1);
-        return nameWithDash.trim();
+            nameWithDash = nameCasing.slice(0, secondNameStart) + nameCasing[secondNameStart].toUpperCase() + nameCasing.slice(secondNameStart + 1);
+            return nameWithDash.trim();
+        } else {
+            const secondNameStart1 = nameCasing.indexOf("-") + 1;
+            const secondNameStart2 = nameCasing.lastIndexOf("-") + 1;
+
+            nameWithDash = nameCasing.slice(0, secondNameStart1) + nameCasing[secondNameStart1].toUpperCase() + nameCasing.slice(secondNameStart1 + 1, secondNameStart2) + nameCasing[secondNameStart2].toUpperCase() + nameCasing.slice(secondNameStart2 + 1);
+            return nameWithDash.trim();
+        }
     } else {
         return nameCasing.trim();
     }
