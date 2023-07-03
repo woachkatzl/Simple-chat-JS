@@ -30,8 +30,7 @@ function postUserComment() {
 function addUserInfo() {
     // Getting the info from user name input and adjusting it
     const userNameInput = nameInput.value;
-    const userNameNoSpaces = userNameInput.replace(/\s/g, "");
-    const userNameCasing = userNameNoSpaces[0].toUpperCase() + userNameNoSpaces.slice(1).toLowerCase();
+    const userName = fixName(userNameInput);
 
     // Getting the info from the avatar link input
     const userAvatarInput = linkInput.value;
@@ -44,7 +43,7 @@ function addUserInfo() {
     // Creating a name element and adding it in the chat
     const namePrint = document.createElement("p");
     namePrint.setAttribute("class", "px-4 fw-bold");
-    namePrint.textContent = userNameCasing;
+    namePrint.textContent = userName;
     userInfo.append(namePrint);
 
     // Creating a user avatar element and adding it in the chat
@@ -68,6 +67,36 @@ function addUserComment() {
     userComment.setAttribute("class", "py-4");
     userComment.textContent = commentNoSpam;
     chatSection.append(userComment);
+}
+
+//FUNCTION TO ADJUST THE USER NAME ACCORDING TO STANDARDS
+function fixName(name) {
+    // Removing extra whitespace symbols
+    const nameNoSpaces = name.replace(/\s+/g, " ").trim();
+
+    // Getting an array with all the names
+    const nameSplit = nameNoSpaces.split(" ");
+
+    // Making each name in the array start with a upper-caes letter
+    nameSplit.forEach(function (item, index, arr) {
+        arr[index] = item[0].toUpperCase() + item.slice(1).toLowerCase();
+    });
+
+    // Retrieving names from the array into a string
+    let nameCasing = "";
+    for (let i = 0; i < nameSplit.length; i++) {
+        nameCasing = nameCasing + nameSplit[i] + " ";
+    }
+
+    // Checking if there is a dash in the name and making sure that the the secomd name after the dash start with an upper cases letter
+    if (nameCasing.includes("-") === true) {
+        const secondNameStart = nameCasing.indexOf("-") + 1;
+
+        const nameWithDash = nameCasing.slice(0, secondNameStart) + nameCasing[secondNameStart].toUpperCase() + nameCasing.slice(secondNameStart + 1);
+        return nameWithDash.trim();
+    } else {
+        return nameCasing.trim();
+    }
 }
 
 //FUNCTION TO CLEAR INPUT FIELDS AFTER THE COMMENT IS SUBMITTED
