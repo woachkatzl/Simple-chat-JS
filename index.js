@@ -14,6 +14,12 @@ submitButton.addEventListener("click", postUserComment);
 
 //FUNCTION TO POST THE USR COMMENT IN THE CHAT
 function postUserComment() {
+    // Checking if all the fileds are filled out
+    if (!nameInput.value || !linkInput.value || !commentInput.value) {
+        alert("Пожалуйста, заполните все поля");
+        return;
+    }
+
     // Adding the user info and comment
     addUserInfo();
     addUserComment();
@@ -89,7 +95,7 @@ function fixName(name) {
     }
 
     // Checking if there is a dash in the name and making sure that the second names after the dash start with an upper cases letter
-    if (nameCasing.includes("-") === true) {
+    if (nameCasing.includes("-")) {
         // Ищу все дефисы в вводных данных
         const dashPosition = nameCasing.match(/-/g);
 
@@ -128,7 +134,5 @@ function clearInputFields() {
 
 //FUNCTION THAT REPLACES "viagra" OR "XXX" WITH "***"
 function checkSpam(str) {
-    const checkViagra = str.replace(/viagra/gi, "***");
-    const checkXxx = checkViagra.replace(/xxx/gi, "***");
-    return checkXxx;
+    return str.replace(/viagra|xxx/gi, "***");
 }
