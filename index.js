@@ -1,5 +1,6 @@
 // FORM ELEMENTS
 const nameInput = document.querySelector("#name-input");
+const nameLabel = document.querySelector(".name-label");
 const linkInput = document.querySelector("#link-input");
 const commentInput = document.querySelector("#comment-input");
 const submitButton = document.querySelector(".btn");
@@ -8,29 +9,39 @@ const nameShowCheck = document.querySelector("#show-name");
 // CHAT ELEMENTS
 const chatSection = document.querySelector(".chat");
 
-// BUTTON EVENT LISTENER
+// EVENT LISTENERS
 submitButton.addEventListener("click", postUserComment);
+nameShowCheck.addEventListener("change", nameField);
 
 //FUNCTIONS
 
 //FUNCTION TO POST THE USR COMMENT IN THE CHAT
 function postUserComment() {
-    // Checking if all the fileds are filled out
-    if (!nameInput.value || !linkInput.value || !commentInput.value) {
-        alert("Пожалуйста, заполните все поля");
+    // Checking if comment field is filled out
+    if (!commentInput.value) {
+        alert("Пожалуйста, напишите ваш комментарий");
+        return;
+    } else if (nameShowCheck.checked && !nameInput.value) {
+        alert("Пожалуйста, введите ваше имя");
         return;
     }
 
     // Adding the user info and comment
-    addUserInfo();
     addUserComment();
-
-    // Adding a divider line and clearing the input fields
-    const divider = document.createElement("hr");
-    chatSection.append(divider);
+    addUserInfo();
 
     // Clearing the input fields
     clearInputFields();
+}
+
+// FUNCTION TO PICK A RANDOM AVATAR
+const avatarAddress = () => {
+    const randomNumber = Math.ceil(Math.random() * 9);
+    const randomAvatarAddress = "assets/avatar" + randomNumber + ".png";
+
+    const avatarAddress = linkInput.value ? linkInput.value : randomAvatarAddress;
+    console.log(avatarAddress)
+    return avatarAddress;
 }
 
 //FUNCTION TO ADD USER NAME AND AVATAR TO THE DISLAYED MESSAGE
@@ -45,7 +56,7 @@ function addUserInfo() {
     // Creating the div container for the user info and adding it in the chat
     const userInfo = document.createElement("div");
     userInfo.setAttribute("class", "d-flex align-items-center");
-    chatSection.append(userInfo);
+    chatSection.prepend(userInfo);
 
     // Creating a name element and adding it in the chat
     const namePrint = document.createElement("p");
@@ -56,7 +67,7 @@ function addUserInfo() {
     // Creating a user avatar element and adding it in the chat
     const userAvatar = document.createElement("img");
     userAvatar.setAttribute("width", "120px");
-    userAvatar.setAttribute("src", userAvatarInput);
+    userAvatar.setAttribute("src", avatarAddress());
     userAvatar.setAttribute("alt", "Ваш аватар");
     userInfo.prepend(userAvatar);
 
@@ -80,7 +91,11 @@ function addUserComment() {
     const userComment = document.createElement("p");
     userComment.setAttribute("class", "py-4");
     userComment.textContent = commentNoSpam;
-    chatSection.append(userComment);
+    chatSection.prepend(userComment);
+
+    // Adding a divider line and clearing the input fields
+    const divider = document.createElement("hr");
+    userComment.after(divider);
 }
 
 //FUNCTION TO ADJUST THE USER NAME ACCORDING TO STANDARDS
@@ -130,6 +145,17 @@ function fixName(name) {
         }
     } else {
         return nameCasing.trim();
+    }
+}
+
+// FUNCTION TO REMOVE OR KEEP THE NAME FIELD DEPENDING ON THE TOGGLE
+function nameField() {
+    if (!nameShowCheck.checked) {
+        nameInput.classList.add("d-none");
+        nameLabel.classList.add("d-none");
+    } else {
+        nameInput.classList.remove("d-none");
+        nameLabel.classList.add("d-none");
     }
 }
 
