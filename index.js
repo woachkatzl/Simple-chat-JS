@@ -3,11 +3,12 @@ const nameInput = document.querySelector("#name-input");
 const linkInput = document.querySelector("#link-input");
 const commentInput = document.querySelector("#comment-input");
 const submitButton = document.querySelector(".btn");
+const nameShowCheck = document.querySelector("#show-name");
 
 // CHAT ELEMENTS
 const chatSection = document.querySelector(".chat");
 
-// BUTTON ELEMENT
+// BUTTON EVENT LISTENER
 submitButton.addEventListener("click", postUserComment);
 
 //FUNCTIONS
@@ -36,7 +37,7 @@ function postUserComment() {
 function addUserInfo() {
     // Getting the info from user name input and adjusting it
     const userNameInput = nameInput.value;
-    const userName = fixName(userNameInput);
+    const userName = nameShowCheck.checked ? fixName(userNameInput) : "username";
 
     // Getting the info from the avatar link input
     const userAvatarInput = linkInput.value;
@@ -48,7 +49,7 @@ function addUserInfo() {
 
     // Creating a name element and adding it in the chat
     const namePrint = document.createElement("p");
-    namePrint.setAttribute("class", "px-4 fw-bold");
+    namePrint.setAttribute("class", "px-4 fw-bold flex-grow-1");
     namePrint.textContent = userName;
     userInfo.append(namePrint);
 
@@ -58,6 +59,13 @@ function addUserInfo() {
     userAvatar.setAttribute("src", userAvatarInput);
     userAvatar.setAttribute("alt", "Ваш аватар");
     userInfo.prepend(userAvatar);
+
+    // Creating a date of the message and adding it in the chat
+    const dateInfo = new Date();
+    const date = document.createElement("p");
+    date.setAttribute("class", "align-self-start text-secondary");
+    date.textContent = dateInfo;
+    userInfo.append(date);
 }
 
 //FUNCTION TO ADD USER COMMENT TO THE DISPLAYED MESSAGE

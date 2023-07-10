@@ -13,13 +13,17 @@
             <div class="col-md-4">
                 <form class="comment-form d-flex flex-column" action="">
                     <h2 class="py-4 fs-3">Оставьте ваш комментарий</h2>
-                    <label class="pb-2" for="name-input">Введите ваше имя:</label>
-                    <input class="mb-3" type="text" name="" id="name-input">
-                    <label class="pb-2" for="link-input">Введите ссылку вашего аватара:</label>
-                    <input class="mb-3" type="text" name="" id="link-input">
-                    <label class="pb-2" for="comment-input">Оставьте комментарий:</label>
-                    <textarea name="" id="comment-input" cols="50" rows="10"></textarea>
-                    <button class="btn btn-success mt-4 w-50" type="button">Отправить</button>
+                    <div class="form-check form-switch form-check-reverse mb-3">
+                        <input class="form-check-input" type="checkbox" role="switch" id="show-name" checked>
+                        <label class="form-check-label" for="show-name">Показывать ваше имя?</label>
+                    </div>
+                    <label class="form-label" for="name-input">Введите ваше имя:</label>
+                    <input class="form-control mb-3" type="text" name="" id="name-input">
+                    <label class="form-label" for="link-input">Введите ссылку вашего аватара:</label>
+                    <input class="form-control mb-3" type="text" name="" id="link-input">
+                    <label class="form-label" for="comment-input">Оставьте комментарий:</label>
+                    <textarea class="form-control" name="" id="comment-input" rows="7"></textarea>
+                    <button class="btn btn-primary mt-4 w-50" type="button">Отправить</button>
                 </form>
             </div>
             <div class="chat col-md-8">
